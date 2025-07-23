@@ -1,0 +1,141 @@
+.login-card {
+  background-color: #3a6b35;
+  padding: 3rem 2.5rem;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 2rem auto;
+}
+
+.login-card h1 {
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+.error-message {
+  background-color: #ffdddd;
+  color: #a94442;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  box-shadow: 0 0 6px rgba(255, 0, 0, 0.2);
+  text-align: left;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  text-align: left;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: #e0e0d1;
+  font-size: 0.95rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1.5px solid #3a6b35;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  transition: border-color 0.3s ease;
+  outline-offset: 2px;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #333;
+}
+
+.form-group input::placeholder {
+  color: #888;
+}
+
+.form-group input:focus {
+  border-color: #2d5016;
+  outline: none;
+  box-shadow: 0 0 8px #2d5016;
+  background-color: #fff;
+  color: #222;
+}
+
+.form-group input.error {
+  border-color: #e74c3c;
+  background-color: #ffe6e6;
+  color: #a94442;
+}
+
+.field-error {
+  color: #e74c3c;
+  margin-top: 0.3rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.login-button {
+  margin-top: 1rem;
+  padding: 0.85rem 0;
+  background-color: #222;
+  color: white;
+  font-weight: 700;
+  font-size: 1.15rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  width: 100%;
+}
+
+.login-button:hover:not(:disabled) {
+  background-color: #444;
+}
+
+.login-button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.login-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #ddd;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.register-link {
+  color: #e0e0d1;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.register-link:hover {
+  color: #a6d08d;
+  text-decoration: underline;
+}
+
+@media (max-width: 450px) {
+  .login-card {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .login-button {
+    font-size: 1rem;
+  }
+}

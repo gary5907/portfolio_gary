@@ -1,21 +1,31 @@
-create table user (
-  id int unsigned primary key auto_increment not null,
-  email varchar(255) not null unique,
-  password varchar(255) not null
+CREATE TABLE user (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  firstname VARCHAR(255) NOT NULL,
+  lastname VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL
 );
 
-create table item (
-  id int unsigned primary key auto_increment not null,
-  title varchar(255) not null,
-  user_id int unsigned not null,
-  foreign key(user_id) references user(id)
+CREATE TABLE projets (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  link VARCHAR(255),
+  image_url VARCHAR(255),
+  users_id INT,
+  FOREIGN KEY (users_id) REFERENCES user(id) ON DELETE CASCADE
 );
 
-insert into user(id, email, password)
-values
-  (1, "jdoe@mail.com", "123456");
+CREATE TABLE skills (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  image_url VARCHAR(255)
+);
 
-insert into item(id, title, user_id)
-values
-  (1, "Stuff", 1),
-  (2, "Doodads", 1);
+CREATE TABLE projets_skills (
+  projets_id INT NOT NULL,
+  skills_id INT NOT NULL,
+  PRIMARY KEY (projets_id, skills_id),
+  FOREIGN KEY (projets_id) REFERENCES projets(id) ON DELETE CASCADE,
+  FOREIGN KEY (skills_id) REFERENCES skills(id) ON DELETE CASCADE
+);
