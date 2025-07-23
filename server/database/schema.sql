@@ -29,3 +29,17 @@ CREATE TABLE projets_skills (
   FOREIGN KEY (projets_id) REFERENCES projets(id) ON DELETE CASCADE,
   FOREIGN KEY (skills_id) REFERENCES skills(id) ON DELETE CASCADE
 );
+
+
+DELETE FROM skills;
+
+INSERT INTO skills (name, image_url) VALUES
+('React', '/src/assets/image/reactjs.svg'),
+('JavaScript', '/src/assets/image/javascript.svg'),
+('HTML5', '/src/assets/image/html5.svg'),
+('CSS3', '/src/assets/image/css3.svg'),
+('Node.js', '/src/assets/image/nodejs.svg'),
+('Express', '/src/assets/image/express.svg'),
+('MySQL', '/src/assets/image/mysql.svg'),
+('Git', '/src/assets/image/git.svg'),
+('GitHub', '/src/assets/image/github.svg');

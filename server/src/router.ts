@@ -14,6 +14,17 @@ router.get("/api/items/:id", itemActions.read);
 router.post("/api/items", itemActions.add);
 
 /* ************************************************************************* */
+// Skills routes
+import skillsActions from "./modules/skills/skillsActions";
+
+router.get("/api/skills", skillsActions.browse);
+router.get("/api/skills/search/:term", skillsActions.search);
+router.get("/api/skills/:id", skillsActions.read);
+router.post("/api/skills", skillsActions.add);
+router.put("/api/skills/:id", skillsActions.edit);
+router.delete("/api/skills/:id", skillsActions.destroy);
+
+/* ************************************************************************* */
 import { hashPassword, login } from "../middlewares/argon.middlewares";
 import {
   checkEmail,
