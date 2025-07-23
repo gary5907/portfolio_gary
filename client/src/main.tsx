@@ -7,12 +7,14 @@ import ProtectedRoute from "../src/components/protectedRoutes/protectedRoutes";
 import App from "./App";
 import Admin from "./pages/admin/Admin";
 import Login from "./pages/login/Login";
+import Profil from "./pages/profil/Profil";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
+      { path: "profil", element: <Profil /> },
       { path: "login", element: <Login /> },
       {
         path: "admin",

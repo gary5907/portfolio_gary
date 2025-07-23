@@ -4,7 +4,6 @@ import jwt from "jsonwebtoken";
 import type { JwtPayload } from "jsonwebtoken";
 import userRepository from "../src/modules/user/userRepository";
 
-// Étendre l'interface Request pour inclure auth
 declare global {
   namespace Express {
     interface Request {

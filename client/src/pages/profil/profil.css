@@ -1,0 +1,270 @@
+.profil-container {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background: #f4f8f1;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #2d5016;
+}
+
+.profil-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.profil-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.profil-photo {
+  width: 350px;
+  height: 250px;
+  border-radius: 16px;
+  object-fit: cover;
+  border: 4px solid #3a6b35;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  margin-bottom: 1.5rem;
+}
+
+.profil-description {
+  font-size: 1.1rem;
+  color: #4a7c59;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.profil-skills-section {
+  background: linear-gradient(135deg, #2d5016, #3a6b35, #4a7c59);
+  color: #f4f8f1;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.profil-section-title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.profil-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.profil-skill-card {
+  background-color: #f4f8f1;
+  color: #2d5016;
+  border-radius: 12px;
+  padding: 0.75rem;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+  min-height: 100px;
+}
+
+.profil-skill-card:hover {
+  transform: scale(1.03);
+}
+
+.profil-skill-icon-wrapper {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 0.5rem;
+}
+
+.profil-skill-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.profil-skill-fallback {
+  width: 48px;
+  height: 48px;
+  background-color: #c8e6c9;
+  color: #2d5016;
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.profil-skill-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  line-height: 1.2;
+}
+
+.profil-loading,
+.profil-error,
+.profil-no-skills {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.profil-error p,
+.profil-no-skills p {
+  background-color: #ffdddd;
+  color: #a94442;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.profil-retry-button {
+  background-color: #3a6b35;
+  color: #f4f8f1;
+  padding: 0.7rem 1.2rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.profil-retry-button:hover {
+  background-color: #2d5016;
+}
+
+.profil-debug {
+  margin-top: 2rem;
+  background-color: #eef7ed;
+  color: #2d5016;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profil-debug summary {
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.profil-debug-content p {
+  margin: 0.3rem 0;
+}
+
+@media (max-width: 768px) {
+  .profil-photo {
+    width: 280px;
+    height: 180px;
+  }
+
+  .profil-section-title {
+    font-size: 1.5rem;
+  }
+
+  .profil-skills-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .profil-skill-card {
+    padding: 0.6rem;
+  }
+
+  .profil-skill-name {
+    font-size: 0.85rem;
+  }
+
+  .profil-skills-section {
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .profil-photo {
+    width: 250px;
+    height: 160px;
+  }
+
+  .profil-title {
+    font-size: 1.6rem;
+  }
+
+  .profil-container {
+    padding: 1rem 0.5rem;
+  }
+
+  .profil-skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+
+  .profil-skill-card {
+    padding: 0.5rem;
+    min-height: 90px;
+  }
+
+  .profil-skill-icon-wrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .profil-skill-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .profil-skill-fallback {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .profil-skill-name {
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+  }
+
+  .profil-skills-section {
+    padding: 1rem 0.8rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .profil-skills-grid {
+    gap: 0.6rem;
+  }
+
+  .profil-skill-card {
+    padding: 0.4rem;
+    min-height: 80px;
+  }
+
+  .profil-skill-icon-wrapper {
+    width: 36px;
+    height: 36px;
+  }
+
+  .profil-skill-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .profil-skill-fallback {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .profil-skill-name {
+    font-size: 0.75rem;
+  }
+}

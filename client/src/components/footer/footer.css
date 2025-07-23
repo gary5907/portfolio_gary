@@ -84,7 +84,6 @@
   opacity: 1;
 }
 
-/* Liens sociaux plus visibles */
 .social-links {
   display: flex;
   gap: 1.5rem;
@@ -117,7 +116,6 @@
   box-shadow: 0 8px 25px rgba(45, 80, 22, 0.4);
 }
 
-/* Texte descriptif pour les liens */
 .social-links a::after {
   content: attr(data-label);
   position: absolute;
@@ -158,7 +156,6 @@
   color: #c8e6c9;
 }
 
-/* Liens simples au lieu de boutons */
 .simple-links {
   display: flex;
   align-items: center;
@@ -193,7 +190,6 @@
   font-size: 0.8rem;
 }
 
-/* Version responsive */
 @media (max-width: 768px) {
   .footer {
     padding: 1rem;
