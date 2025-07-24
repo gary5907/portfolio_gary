@@ -34,20 +34,24 @@ const read: RequestHandler = async (req, res, next) => {
 
 const add: RequestHandler = async (req, res, next) => {
   try {
-    const { name, image_url } = req.body;
+    const { name } = req.body;
+    const imageSkill = req.file?.path;
 
     if (!name) {
       res.status(400).json({ error: "Skill name is required" });
       return;
     }
 
-    const existingSkill = await skillsRepository.readByName(name);
-    if (existingSkill) {
-      res.status(409).json({ error: "Skill already exists" });
-      return;
-    }
+    const imageUrl = imageSkill
+      ? `${req.protocol}://${req.get("host")}/${imageSkill.replace(/\\/g, "/")}`
+      : undefined;
 
-    const skillId = await skillsRepository.create({ name, image_url });
+    const skillData = {
+      name,
+      image_url: imageUrl,
+    };
+
+    const skillId = await skillsRepository.create(skillData);
     const newSkill = await skillsRepository.read(skillId);
 
     res.status(201).json(newSkill);
@@ -59,15 +63,31 @@ const add: RequestHandler = async (req, res, next) => {
 const edit: RequestHandler = async (req, res, next) => {
   try {
     const skillId = Number.parseInt(req.params.id, 10);
+    const { name } = req.body;
+    const imageSkill = req.file?.path;
 
     if (Number.isNaN(skillId)) {
       res.status(400).json({ error: "Invalid skill ID" });
       return;
     }
 
-    const { name, image_url } = req.body;
+    if (!name) {
+      res.status(400).json({ error: "Skill name is required" });
+      return;
+    }
 
-    const updated = await skillsRepository.update(skillId, { name, image_url });
+    const existingSkill = await skillsRepository.read(skillId);
+    if (!existingSkill) {
+      res.status(404).json({ error: "Skill not found" });
+      return;
+    }
+
+    const skillData = {
+      name,
+      image_url: imageSkill || existingSkill.image_url || undefined, // 👈 AJOUTÉ || undefined
+    };
+
+    const updated = await skillsRepository.update(skillId, skillData);
 
     if (!updated) {
       res.status(404).json({ error: "Skill not found" });

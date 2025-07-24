@@ -28,16 +28,14 @@ export default function Login() {
     setErrorMsg(null);
 
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/login`,
-        data,
-        { withCredentials: true },
-      );
-
-      const user = response.data;
-
-      authenticate(user);
-      navigate("/admin");
+      await axios
+        .post(`${import.meta.env.VITE_API_URL}/api/login`, data, {
+          withCredentials: true,
+        })
+        .then(() => {
+          authenticate();
+          navigate("/admin");
+        });
     } catch (err) {
       setErrorMsg("Erreur de la connexion. Veuillez réessayer.");
       setLoading(false);
