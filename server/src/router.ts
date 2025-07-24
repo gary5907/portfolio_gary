@@ -57,4 +57,12 @@ router.post(
 router.get("/api/users", userActions.browse);
 router.get("/api/users/:id", userActions.read);
 
+import { deleteCookie } from "../middlewares/verify/deleteCoockies";
+/** cokie validation route */
+import { verifyCookie } from "../middlewares/verify/verifyCoockies";
+
+router.get("/api/me", verifyCookie);
+router.post("/api/logout", deleteCookie);
+
+
 export default router;

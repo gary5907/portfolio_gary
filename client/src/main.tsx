@@ -7,6 +7,7 @@ import App from "./App";
 import Admin from "./pages/admin/Admin";
 import Login from "./pages/login/Login";
 import Profil from "./pages/profil/Profil";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,11 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       {
         path: "admin",
-        element: <Admin />,
+        element: (
+          <ProtectedRoute>
+            <Admin />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
@@ -31,5 +36,5 @@ createRoot(rootElement).render(
     <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>
-  </StrictMode>,
+  </StrictMode>
 );

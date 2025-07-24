@@ -39,7 +39,7 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link to="/admin" onClick={() => setMenuOpen(false)}>
+          <Link to="/about" onClick={() => setMenuOpen(false)}>
             À propos
           </Link>
         </li>
