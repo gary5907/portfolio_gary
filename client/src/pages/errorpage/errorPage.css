@@ -39,7 +39,7 @@
 
 .error-images {
   width: 100vw;
-  height: 100vh; /* Prend toute la hauteur de la page */
+  height: 100vh; 
   display: flex;
   justify-content: center;
   align-items: center;
