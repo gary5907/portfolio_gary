@@ -8,6 +8,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Admin from "./pages/admin/Admin";
 import Login from "./pages/login/Login";
 import Profil from "./pages/profil/Profil";
+import About from "./pages/about/About";
+import ErrorPage from "./pages/errorpage/ErrorPage";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +17,8 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: "profil", element: <Profil /> },
+      { path: "about", element: <About /> },
+      { path: "*", element: <ErrorPage /> },
       { path: "login", element: <Login /> },
       {
         path: "admin",
