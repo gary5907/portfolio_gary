@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router";
 import { AuthProvider } from "../src/auth/authContext";
 
 import App from "./App";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Admin from "./pages/admin/Admin";
 import Login from "./pages/login/Login";
 import Profil from "./pages/profil/Profil";
@@ -17,7 +18,11 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       {
         path: "admin",
-        element: <Admin />,
+        element: (
+          <ProtectedRoute>
+            <Admin />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
