@@ -1,6 +1,6 @@
-import { useAuth } from "../auth/authContext";
-import { Navigate } from "react-router";
 import type { ReactElement } from "react";
+import { Navigate } from "react-router";
+import { useAuth } from "../auth/authContext";
 
 type ProtectedRouteProps = {
   children: ReactElement;

@@ -64,5 +64,4 @@ import { verifyCookie } from "../middlewares/verify/verifyCoockies";
 router.get("/api/me", verifyCookie);
 router.post("/api/logout", deleteCookie);
 
-
 export default router;
