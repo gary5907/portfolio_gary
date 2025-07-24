@@ -13,6 +13,7 @@ router.get("/api/items", itemActions.browse);
 router.get("/api/items/:id", itemActions.read);
 router.post("/api/items", itemActions.add);
 
+import skillValidation from "../validations/skillValidation";
 /* ************************************************************************* */
 // Skills routes
 import skillsActions from "./modules/skills/skillsActions";
@@ -20,8 +21,18 @@ import skillsActions from "./modules/skills/skillsActions";
 router.get("/api/skills", skillsActions.browse);
 router.get("/api/skills/search/:term", skillsActions.search);
 router.get("/api/skills/:id", skillsActions.read);
-router.post("/api/skills", skillsActions.add);
-router.put("/api/skills/:id", skillsActions.edit);
+router.post(
+  "/api/skills",
+  upload.single("image"),
+  skillValidation,
+  skillsActions.add,
+);
+router.put(
+  "/api/skills/:id",
+  upload.single("image"),
+  skillValidation,
+  skillsActions.edit,
+);
 router.delete("/api/skills/:id", skillsActions.destroy);
 
 /* ************************************************************************* */
@@ -30,6 +41,7 @@ import {
   checkEmail,
   checkEmailAndStoreUserData,
 } from "../middlewares/checkEmail.middlewares";
+import upload from "../middlewares/uploads";
 import validateUser from "../validations/userValidations";
 import userActions from "./modules/user/userActions";
 

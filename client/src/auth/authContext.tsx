@@ -1,49 +1,60 @@
-import { createContext, useContext, useState } from "react";
-import type { ReactNode } from "react";
-interface User {
-  id: number;
-  firstname: string;
-  lastname: string;
-  email: string;
-}
+import axios from "axios";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import type { Account, ContextType } from "../types/Definitions";
 
-interface AuthContextType {
-  user: User | null;
-  authenticate: (user: User) => void;
-  logout: () => void;
-  isAuthenticated: boolean;
-}
+type ChildrenType = {
+  children: React.ReactNode;
+};
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<ContextType | null>(null);
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+export function AuthProvider({ children }: ChildrenType) {
+  const [account, setAccount] = useState<Account | null>(null);
 
-  const authenticate = (userData: User) => {
-    setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
-  };
+  const isConnected = account != null;
 
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem("user");
-  };
+  const authenticate = useCallback(() => {
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/api/me`, { withCredentials: true })
+      .then((response) => setAccount(response.data))
+      .catch(() => setAccount(null));
+  }, []);
 
-  const isAuthenticated = user !== null;
+  useEffect(() => {
+    authenticate();
+  }, [authenticate]);
+
+  const logout = useCallback(() => {
+    axios
+      .post(
+        `${import.meta.env.VITE_API_URL}/api/logout`,
+        {},
+        { withCredentials: true },
+      )
+      .then(() => {
+        setAccount(null);
+      });
+  }, []);
 
   return (
     <AuthContext.Provider
-      value={{ user, authenticate, logout, isAuthenticated }}
+      value={{ account, isConnected, authenticate, logout }}
     >
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
-export const useAuth = (): AuthContextType => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth doit être utilisé dans un AuthProvider");
+export const useAuth = () => {
+  const authState = useContext(AuthContext);
+  if (!authState) {
+    throw new Error("there's an error with Authprovider");
   }
-  return context;
+  return authState;
 };

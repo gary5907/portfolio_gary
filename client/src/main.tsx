@@ -2,7 +2,6 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
 import { AuthProvider } from "../src/auth/authContext";
-import ProtectedRoute from "../src/components/protectedRoutes/protectedRoutes";
 
 import App from "./App";
 import Admin from "./pages/admin/Admin";
@@ -18,11 +17,7 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       {
         path: "admin",
-        element: (
-          <ProtectedRoute>
-            <Admin />
-          </ProtectedRoute>
-        ),
+        element: <Admin />,
       },
     ],
   },

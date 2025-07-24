@@ -1,0 +1,24 @@
+.container {
+  width: 10em;
+  height: 10em;
+  border: 2px dashed #ccc;
+  border-radius: 1em;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.thumbInner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.container p {
+  margin: 0;
+  text-align: center;
+  @media screen and (min-width: 1200px) {
+    font-size: 2.2em;
+  }
+}

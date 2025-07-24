@@ -5,3 +5,8 @@ export type UserType = {
   email: string;
   password: string;
 };
+
+export type ParsedNewSkill = {
+  name: string;
+  image_url: File;
+};

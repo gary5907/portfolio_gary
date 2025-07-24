@@ -1,54 +1,285 @@
-/* Mobile First */
-
-body {
-  font-family: sans-serif;
-  background-color: #fdfdfd;
-  padding: 1rem;
-  color: #222;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-h1 {
-  font-size: 1.5rem;
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f8f1;
+  color: #2d5016;
+  line-height: 1.6;
+}
+
+.admin-container {
+  max-width: 500px;
+  margin: 1rem auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #2d5016, #3a6b35, #4a7c59);
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  color: #f4f8f1;
+  border-radius: 1rem;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.admin-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background: #e8f5e8;
+  border-radius: 8px;
+}
+
+.admin-header h1 {
+  color: #2d5016;
+  margin-bottom: 0.5rem;
+}
+
+.admin-tabs {
+  display: flex;
+  margin-bottom: 2rem;
+  background: #c8e6c9;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.admin-tab {
+  flex: 1;
+  padding: 1rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: #2d5016;
+}
+
+.admin-tab--active {
+  background: #1a3009;
+  color: white;
+}
+
+.admin-message {
+  padding: 1rem;
+  border-radius: 6px;
   margin-bottom: 1rem;
   text-align: center;
 }
 
-.form-section {
-  margin-bottom: 2rem;
+.admin-message--success {
+  background: #d4edda;
+  color: #2d5016;
 }
 
-label {
+.admin-message--error {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.admin-form-section,
+.admin-skills-section,
+.admin-projects-section {
+  background: #e8f5e8;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+}
+
+.admin-form-section h2,
+.admin-skills-section h2,
+.admin-projects-section h2 {
+  color: #2d5016;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #c8e6c9;
+  padding-bottom: 0.5rem;
+}
+
+.admin-form-group {
+  margin-bottom: 1rem;
+}
+
+.admin-label {
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: bold;
+  font-weight: 600;
+  color: #2d5016;
 }
 
-input,
-textarea,
-button {
+.admin-input {
   width: 100%;
   padding: 0.75rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
+  border: 2px solid #c8e6c9;
   border-radius: 6px;
-  font-family: inherit;
+  font-size: 1rem;
+  background: white;
 }
 
-button {
-  background-color: #007bff;
-  color: white;
-  font-weight: bold;
+.admin-input:focus {
+  outline: none;
+  border-color: #4a7c59;
+}
+
+.admin-input--error {
+  border-color: #dc3545;
+}
+
+.admin-help {
+  font-size: 0.85rem;
+  color: #4a7c59;
+  margin-top: 0.25rem;
+}
+
+.admin-error {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.admin-form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.admin-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #0056b3;
+.admin-btn--primary {
+  background: #1a3009;
+  color: white;
 }
 
-/* Desktop */
-@media screen and (min-width: 768px) {
-  .form-section {
-    max-width: 600px;
-    margin: auto;
+.admin-btn--primary:hover {
+  background: #3a6b35;
+}
+
+.admin-btn--secondary {
+  background: #495057;
+  color: white;
+}
+
+.admin-btn--edit {
+  background: #1a3009;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+.admin-btn--delete {
+  background: #8b1538;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+.admin-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.admin-skills-grid,
+.admin-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+}
+
+.admin-skill-card,
+.admin-project-card {
+  background: #f0f8f0;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+
+.admin-skill-card:hover,
+.admin-project-card:hover {
+  background: #d8ecd8;
+}
+
+.admin-skill-icon,
+.admin-project-icon {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 0.75rem;
+}
+
+.admin-skill-image,
+.admin-project-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.admin-skill-fallback,
+.admin-project-fallback {
+  width: 40px;
+  height: 40px;
+  background: #1a3009;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.admin-skill-name,
+.admin-project-name {
+  margin-bottom: 0.75rem;
+  color: #2d5016;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.admin-skill-actions,
+.admin-project-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.admin-tab-content {
+  display: none;
+}
+
+.admin-tab-content--active {
+  display: block;
+}
+
+.admin-empty {
+  text-align: center;
+  padding: 2rem;
+  color: #4a7c59;
+}
+
+@media (max-width: 768px) {
+  .admin-container {
+    padding: 1rem;
+  }
+
+  .admin-tabs {
+    flex-direction: column;
+  }
+
+  .admin-form-actions {
+    flex-direction: column;
+  }
+
+  .admin-skill-actions,
+  .admin-project-actions {
+    flex-direction: column;
+  }
+
+  .admin-skills-grid,
+  .admin-projects-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }
 }

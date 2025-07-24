@@ -61,7 +61,7 @@ const Profil = () => {
       <header className="profil-header">
         <h1 className="profil-title">Bienvenue</h1>
         <img
-          src="/image/riviere_code.png"
+          src="/src/assets/image/riviere_code.png"
           alt="arbre code"
           className="profil-photo"
         />
