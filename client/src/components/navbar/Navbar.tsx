@@ -29,7 +29,7 @@ export default function Navbar() {
 
       <ul className={`navbar-links ${menuOpen ? "open" : ""}`}>
         <li>
-          <Link to="/profil" onClick={() => setMenuOpen(false)}>
+          <Link to="/" onClick={() => setMenuOpen(false)}>
             Accueil
           </Link>
         </li>

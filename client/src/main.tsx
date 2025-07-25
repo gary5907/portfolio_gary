@@ -10,18 +10,20 @@ import Admin from "./pages/admin/Admin";
 import ErrorPage from "./pages/errorpage/ErrorPage";
 import Login from "./pages/login/Login";
 import Profil from "./pages/profil/Profil";
+import Projets from "./pages/projets/Projets";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     children: [
-      { path: "profil", element: <Profil /> },
-      { path: "about", element: <About /> },
-      { path: "*", element: <ErrorPage /> },
-      { path: "login", element: <Login /> },
+      { path: "/", element: <Profil /> },
+      { path: "/about", element: <About /> },
+      { path: "/*", element: <ErrorPage /> },
+      { path: "/projets", element: <Projets /> },
+      { path: "/login", element: <Login /> },
       {
-        path: "admin",
+        path: "/admin",
         element: (
           <ProtectedRoute>
             <Admin />
