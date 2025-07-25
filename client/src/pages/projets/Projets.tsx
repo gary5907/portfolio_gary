@@ -17,6 +17,18 @@ type Projet = {
   skills?: Skill[];
 };
 
+const getImageSrc = (imageUrl?: string) => {
+  const baseUrl = import.meta.env.VITE_API_URL;
+  if (!imageUrl) return "";
+  if (baseUrl.endsWith("/") && imageUrl.startsWith("/")) {
+    return baseUrl + imageUrl.slice(1);
+  }
+  if (!baseUrl.endsWith("/") && !imageUrl.startsWith("/")) {
+    return `${baseUrl}/${imageUrl}`;
+  }
+  return baseUrl + imageUrl;
+};
+
 export default function Projets() {
   const [projets, setProjets] = useState<Projet[]>([]);
   const [loading, setLoading] = useState(true);
@@ -53,7 +65,7 @@ export default function Projets() {
                     <li key={skill.id}>
                       {skill.image_url && (
                         <img
-                          src={skill.image_url}
+                          src={getImageSrc(skill.image_url)}
                           alt={skill.name}
                           className="skill-img"
                         />
