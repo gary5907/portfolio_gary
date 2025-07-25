@@ -18,7 +18,7 @@ export default function Footer() {
           </a>
           <span>•</span>
           <a
-            href="https://linkedin.com/in/votre-profil"
+            href="https://www.linkedin.com/in/gary-gras-281650332/"
             target="_blank"
             rel="noopener noreferrer"
           >

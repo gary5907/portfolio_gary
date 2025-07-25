@@ -56,6 +56,18 @@ const Profil = () => {
       .finally(() => setLoading(false));
   };
 
+  const getImageSrc = (imageUrl?: string) => {
+    const baseUrl = import.meta.env.VITE_API_URL;
+    if (!imageUrl) return "";
+    if (baseUrl.endsWith("/") && imageUrl.startsWith("/")) {
+      return baseUrl + imageUrl.slice(1);
+    }
+    if (!baseUrl.endsWith("/") && !imageUrl.startsWith("/")) {
+      return `${baseUrl}/${imageUrl}`;
+    }
+    return baseUrl + imageUrl;
+  };
+
   return (
     <div className="profil-container">
       <header className="profil-header">
@@ -102,32 +114,28 @@ const Profil = () => {
         {!loading && !error && (
           <div className="profil-skills-grid">
             {skills.length > 0 ? (
-              skills.map((skill) => (
-                <div key={skill.id} className="profil-skill-card">
-                  <div className="profil-skill-icon-wrapper">
-                    {skill.image_url ? (
-                      <img
-                        src={skill.image_url}
-                        alt={`Icône ${skill.name}`}
-                        className="profil-skill-icon"
-                        onError={(e) => {
-                          e.currentTarget.style.display = "none";
-                          const fallback = e.currentTarget
-                            .nextElementSibling as HTMLElement;
-                          if (fallback) fallback.style.display = "flex";
-                        }}
-                      />
-                    ) : null}
-                    <div
-                      className="profil-skill-fallback"
-                      style={{ display: skill.image_url ? "none" : "flex" }}
-                    >
-                      {skill.name.charAt(0).toUpperCase()}
+              skills.map((skill) => {
+                return (
+                  <div key={skill.id} className="profil-skill-card">
+                    <div className="profil-skill-icon-wrapper">
+                      {skill.image_url ? (
+                        <img
+                          src={getImageSrc(skill.image_url)}
+                          alt={`Icône ${skill.name}`}
+                          className="profil-skill-icon"
+                        />
+                      ) : null}
+                      <div
+                        className="profil-skill-fallback"
+                        style={{ display: skill.image_url ? "none" : "flex" }}
+                      >
+                        {skill.name.charAt(0).toUpperCase()}
+                      </div>
                     </div>
+                    <h3 className="profil-skill-name">{skill.name}</h3>
                   </div>
-                  <h3 className="profil-skill-name">{skill.name}</h3>
-                </div>
-              ))
+                );
+              })
             ) : (
               <div className="profil-no-skills">
                 <p>📭 Aucune compétence trouvée</p>
