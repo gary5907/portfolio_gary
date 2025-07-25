@@ -13,6 +13,7 @@ router.get("/api/items", itemActions.browse);
 router.get("/api/items/:id", itemActions.read);
 router.post("/api/items", itemActions.add);
 
+import upload from "../middlewares/uploads";
 import skillValidation from "../validations/skillValidation";
 /* ************************************************************************* */
 // Skills routes
@@ -41,7 +42,6 @@ import {
   checkEmail,
   checkEmailAndStoreUserData,
 } from "../middlewares/checkEmail.middlewares";
-import upload from "../middlewares/uploads";
 import validateUser from "../validations/userValidations";
 import userActions from "./modules/user/userActions";
 
@@ -58,10 +58,20 @@ router.get("/api/users", userActions.browse);
 router.get("/api/users/:id", userActions.read);
 
 import { deleteCookie } from "../middlewares/verify/deleteCoockies";
-/** cokie validation route */
 import { verifyCookie } from "../middlewares/verify/verifyCoockies";
 
 router.get("/api/me", verifyCookie);
 router.post("/api/logout", deleteCookie);
+
+/* ************************************************************************* */
+// Projets routes
+import projetsActions from "./modules/projets/projetsAction";
+
+router.get("/api/projets", projetsActions.browse);
+router.get("/api/projets-with-skills", projetsActions.browseWithSkills); // 👈 nouvelle route pour projets + skills
+router.get("/api/projets/:id", projetsActions.read);
+router.post("/api/projets", projetsActions.add);
+router.put("/api/projets/:id", projetsActions.edit);
+router.delete("/api/projets/:id", projetsActions.destroy);
 
 export default router;

@@ -1,0 +1,133 @@
+.projets-container {
+  max-width: 900px;
+  margin: 40px auto 60px auto;
+  padding: 32px 24px;
+  background: linear-gradient(135deg, #2d5016, #3a6b35, #4a7c59);
+  border-radius: 16px;
+  box-shadow: 0 2px 16px #0001;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.projets-container h1 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 32px;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+.projets-list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  justify-items: center;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+@media (min-width: 700px) {
+  .projets-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.projet-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #0002;
+  padding: 18px 12px;
+  color: #133014;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 280px;
+  min-height: 340px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.projet-img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  background: #fff;
+  box-shadow: 0 1px 8px #0e3b1033;
+  border: 3px solid #134622;
+  max-width: 100%;
+}
+
+.projet-card h2 {
+  margin: 0 0 10px 0;
+  font-size: 1.18rem;
+  color: #133f15;
+  word-break: break-word;
+}
+
+.projet-card p {
+  margin: 0 0 12px 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #2d5016;
+  word-break: break-word;
+}
+
+.projet-skills {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.projet-skills strong {
+  color: #3a6b35;
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.projet-skills ul {
+  padding-left: 0;
+  margin: 6px 0 0 0;
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.projet-skills li {
+  color: #388e3c;
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 60px;
+  word-break: break-word;
+}
+
+.skill-img {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 2px;
+  background: #fff;
+  border: 1px solid #388e3c;
+  box-shadow: 0 1px 4px #388e3c22;
+  max-width: 100%;
+}
