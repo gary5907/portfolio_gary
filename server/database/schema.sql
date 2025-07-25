@@ -33,15 +33,15 @@ INSERT INTO user (firstname, lastname, email, password) VALUES
 ('Gary', 'Gras', 'gary@example.com', '$argon2id$v=19$m=19456,t=2,p=1$0B02e2YJ4FRqfzMXoX8FIg$jrf0F5/9oUupOvpmqNKkUh64wPXC5fNwLYJ1o88aQMs');
 
 INSERT INTO skills (name, image_url) VALUES
-('React', '/src/assets/image/reactjs.svg'),
-('JavaScript', '/src/assets/image/javascript.svg'),
-('HTML5', '/src/assets/image/html5.svg'),
-('CSS3', '/src/assets/image/css3.svg'),
-('Node.js', '/src/assets/image/nodejs.svg'),
-('Express', '/src/assets/image/express.svg'),
-('MySQL', '/src/assets/image/mysql.svg'),
-('Git', '/src/assets/image/git.svg'),
-('GitHub', '/src/assets/image/github.svg');
+('React', '/assets/images/reactjs.svg'),
+('JavaScript', '/assets/images/javascript.svg'),
+('HTML5', '/assets/images/html5.svg'),
+('CSS3', '/assets/images/css3.svg'),
+('Node.js', '/assets/images/nodejs.svg'),
+('Express', '/assets/images/express.svg'),
+('MySQL', '/assets/images/mysql.svg'),
+('Git', '/assets/images/git.svg'),
+('GitHub', '/assets/images/github.svg');
 
 INSERT INTO projets (title, description, image_url, user_id) VALUES
 ('Eating Nam Nam', 'Un projet fait en collaboration avec d\'autres développeurs pour créer des recettes uniques.', '/src/assets/image/eatDesk.png', 1),

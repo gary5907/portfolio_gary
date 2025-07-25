@@ -4,7 +4,7 @@ import "./errorPage.css";
 export default function ErrorPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
-      window.location.href = "/profil";
+      window.location.href = "/";
     }, 5000);
     return () => clearTimeout(timer);
   }, []);

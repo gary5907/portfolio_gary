@@ -1,4 +1,5 @@
 import type { RequestHandler } from "express";
+import { normalizeImagePath } from "../../../middlewares/uploads";
 import skillsRepository from "./skillsRepository";
 
 const browse: RequestHandler = async (req, res, next) => {
@@ -42,9 +43,7 @@ const add: RequestHandler = async (req, res, next) => {
       return;
     }
 
-    const imageUrl = imageSkill
-      ? `${req.protocol}://${req.get("host")}/${imageSkill.replace(/\\/g, "/")}`
-      : undefined;
+    const imageUrl = normalizeImagePath(imageSkill);
 
     const skillData = {
       name,
@@ -82,9 +81,13 @@ const edit: RequestHandler = async (req, res, next) => {
       return;
     }
 
+    const imageUrl = imageSkill
+      ? normalizeImagePath(imageSkill)
+      : existingSkill.image_url;
+
     const skillData = {
       name,
-      image_url: imageSkill || existingSkill.image_url || undefined, // 👈 AJOUTÉ || undefined
+      image_url: imageUrl,
     };
 
     const updated = await skillsRepository.update(skillId, skillData);

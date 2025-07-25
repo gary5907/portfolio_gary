@@ -25,7 +25,8 @@ export default function Admin() {
     type: "success" | "error";
     text: string;
   } | null>(null);
-  const [previewImage, setPreviewImage] = useState<string | null>(null); // 👈 AJOUTÉ
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const baseUrl = import.meta.env.VITE_API_URL;
 
   const {
     register,
@@ -34,13 +35,10 @@ export default function Admin() {
     watch,
     formState: { errors },
   } = useForm<SkillFormData>();
-
   const watchedImage = watch("image");
 
   useEffect(() => {
-    if (activeTab === "skills") {
-      fetchSkills();
-    }
+    if (activeTab === "skills") fetchSkills();
   }, [activeTab]);
 
   useEffect(() => {
@@ -48,25 +46,15 @@ export default function Admin() {
       const file = watchedImage[0];
       const imageUrl = URL.createObjectURL(file);
       setPreviewImage(imageUrl);
-
       return () => URL.revokeObjectURL(imageUrl);
     }
   }, [watchedImage]);
 
-  const resetForm = () => {
-    reset();
-    setPreviewImage(null);
-    setEditingSkill(null);
-  };
-
   const fetchSkills = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/skills`,
-      );
+      const response = await axios.get(`${baseUrl}/api/skills`);
       setSkills(response.data);
     } catch (error) {
-      console.error("Erreur lors du chargement des skills:", error);
       showMessage("error", "Erreur lors du chargement des compétences");
     }
   };
@@ -76,64 +64,37 @@ export default function Admin() {
     setTimeout(() => setMessage(null), 5000);
   };
 
+  const resetForm = () => {
+    reset();
+    setPreviewImage(null);
+    setEditingSkill(null);
+  };
+
   const onSubmit: SubmitHandler<SkillFormData> = async (data) => {
     setLoading(true);
-
     try {
-      if (!editingSkill) {
-        const existingSkill = skills.find(
-          (skill) => skill.name.toLowerCase() === data.name.toLowerCase(),
-        );
-
-        if (existingSkill) {
-          showMessage("error", "Cette compétence existe déjà !");
-          setLoading(false);
-          return;
-        }
-      }
-
       const formData = new FormData();
       formData.append("name", data.name);
-
-      if (data.image && data.image.length > 0) {
+      if (data.image && data.image.length > 0)
         formData.append("image", data.image[0]);
-      }
 
       if (editingSkill) {
-        await axios.put(
-          `${import.meta.env.VITE_API_URL}/api/skills/${editingSkill.id}`,
-          formData,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-            withCredentials: true,
-          },
-        );
-        showMessage("success", "Compétence mise à jour avec succès !");
+        await axios.put(`${baseUrl}/api/skills/${editingSkill.id}`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+          withCredentials: true,
+        });
+        showMessage("success", "Compétence mise à jour !");
       } else {
-        await axios.post(
-          `${import.meta.env.VITE_API_URL}/api/skills`,
-          formData,
-          {
-            headers: { "Content-Type": "multipart/form-data" },
-            withCredentials: true,
-          },
-        );
-        showMessage("success", "Compétence créée avec succès !");
+        await axios.post(`${baseUrl}/api/skills`, formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+          withCredentials: true,
+        });
+        showMessage("success", "Compétence créée !");
       }
-
       resetForm();
       fetchSkills();
     } catch (error) {
-      console.error("Erreur lors de la sauvegarde:", error);
-      if (axios.isAxiosError(error)) {
-        const errorMsg =
-          error.response?.data?.error ||
-          error.response?.data?.message ||
-          "Erreur lors de la sauvegarde";
-        showMessage("error", errorMsg);
-      } else {
-        showMessage("error", "Erreur lors de la sauvegarde");
-      }
+      showMessage("error", "Erreur lors de la sauvegarde");
     } finally {
       setLoading(false);
     }
@@ -141,39 +102,36 @@ export default function Admin() {
 
   const handleEdit = (skill: SkillType) => {
     setEditingSkill(skill);
-    reset({
-      name: skill.name,
-    });
+    reset({ name: skill.name });
     setPreviewImage(skill.image_url || null);
   };
 
-  const handleCancelEdit = () => {
-    resetForm();
-  };
-
   const handleDelete = async (skillId: number, skillName: string) => {
-    if (
-      !window.confirm(`Êtes-vous sûr de vouloir supprimer "${skillName}" ?`)
-    ) {
-      return;
-    }
-
+    if (!window.confirm(`Supprimer "${skillName}" ?`)) return;
     setLoading(true);
-
     try {
-      await axios.delete(
-        `${import.meta.env.VITE_API_URL}/api/skills/${skillId}`,
-        { withCredentials: true },
-      );
-
-      showMessage("success", "Compétence supprimée avec succès !");
+      await axios.delete(`${baseUrl}/api/skills/${skillId}`, {
+        withCredentials: true,
+      });
+      showMessage("success", "Compétence supprimée !");
       fetchSkills();
-    } catch (error) {
-      console.error("Erreur lors de la suppression:", error);
+    } catch {
       showMessage("error", "Erreur lors de la suppression");
     } finally {
       setLoading(false);
     }
+  };
+
+  const getImageSrc = (imageUrl?: string) => {
+    if (!imageUrl) return "";
+    if (baseUrl.endsWith("/") && imageUrl.startsWith("/")) {
+      return baseUrl + imageUrl.slice(1);
+    }
+    if (!baseUrl.endsWith("/") && !imageUrl.startsWith("/")) {
+      return `${baseUrl}/${imageUrl}`;
+    }
+
+    return baseUrl + imageUrl;
   };
 
   return (
@@ -215,7 +173,6 @@ export default function Admin() {
               ? `Modifier "${editingSkill.name}"`
               : "Ajouter une nouvelle compétence"}
           </h2>
-
           <form onSubmit={handleSubmit(onSubmit)} className="admin-form">
             <div className="admin-form-group">
               <label htmlFor="name" className="admin-label">
@@ -242,7 +199,6 @@ export default function Admin() {
                 <span className="admin-error">{errors.name.message}</span>
               )}
             </div>
-
             <div className="admin-form-group">
               <label htmlFor="image" className="admin-label">
                 Image de la compétence
@@ -257,7 +213,6 @@ export default function Admin() {
               <small className="admin-help">
                 Formats acceptés : JPG, PNG, SVG
               </small>
-
               {previewImage && (
                 <div style={{ marginTop: "10px" }}>
                   <p className="admin-label">Aperçu :</p>
@@ -293,7 +248,6 @@ export default function Admin() {
                 </div>
               )}
             </div>
-
             <div className="admin-form-actions">
               <button
                 type="submit"
@@ -306,12 +260,11 @@ export default function Admin() {
                     ? "✏️ Modifier"
                     : "➕ Créer"}
               </button>
-
               {editingSkill && (
                 <button
                   type="button"
                   className="admin-btn admin-btn--secondary"
-                  onClick={handleCancelEdit}
+                  onClick={resetForm}
                   disabled={loading}
                 >
                   ❌ Annuler
@@ -323,7 +276,6 @@ export default function Admin() {
 
         <section className="admin-skills-section">
           <h2>Compétences existantes ({skills.length})</h2>
-
           {skills.length === 0 ? (
             <div className="admin-empty">
               <p>Aucune compétence trouvée</p>
@@ -335,15 +287,9 @@ export default function Admin() {
                   <div className="admin-skill-icon">
                     {skill.image_url ? (
                       <img
-                        src={skill.image_url}
+                        src={getImageSrc(skill.image_url)}
                         alt={`Logo ${skill.name}`}
                         className="admin-skill-image"
-                        onError={(e) => {
-                          e.currentTarget.style.display = "none";
-                          const fallback = e.currentTarget
-                            .nextElementSibling as HTMLElement;
-                          if (fallback) fallback.style.display = "flex";
-                        }}
                       />
                     ) : null}
                     <div
@@ -353,9 +299,7 @@ export default function Admin() {
                       {skill.name.charAt(0).toUpperCase()}
                     </div>
                   </div>
-
                   <h3 className="admin-skill-name">{skill.name}</h3>
-
                   <div className="admin-skill-actions">
                     <button
                       type="button"
