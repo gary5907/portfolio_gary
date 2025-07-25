@@ -124,13 +124,14 @@ export default function Admin() {
 
   const getImageSrc = (imageUrl?: string) => {
     if (!imageUrl) return "";
+    // Correction : toujours utiliser /assets/images/ (pluriel)
+    // et baseUrl pour l'URL complète
     if (baseUrl.endsWith("/") && imageUrl.startsWith("/")) {
       return baseUrl + imageUrl.slice(1);
     }
     if (!baseUrl.endsWith("/") && !imageUrl.startsWith("/")) {
       return `${baseUrl}/${imageUrl}`;
     }
-
     return baseUrl + imageUrl;
   };
 
